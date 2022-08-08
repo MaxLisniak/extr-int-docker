@@ -1,0 +1,29 @@
+volumes:
+  testVolume:
+    external: true
+
+services:
+  backend:
+    restart: unless-stopped
+    build: ./backend
+    ports:
+      - 3000
+    depends_on:
+      - redis
+    volumes:
+      - testVolume:/usr/src/persisting:rw
+
+  nginx:
+    restart: unless-stopped
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+  redis:
+    restart: unless-stopped
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    volumes:
+      - testVolume:/usr/src/persisting:ro

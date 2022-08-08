@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+      "module": "CommonJS",
+      "target": "ES3",
+      "outDir": "dist"
+    },
+    "files": ["index.ts"],
+}
